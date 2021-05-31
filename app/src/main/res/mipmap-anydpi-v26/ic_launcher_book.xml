@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--    links to the background styling for the launcher icon-->
+    <background android:drawable="@drawable/ic_launcher_background" />
+    <!--    links to the launcher book icon. This icon is from the font awesome free library.
+    https://fontawesome.com/license/free-->
+    <foreground android:drawable="@drawable/ic_launcher_book_foreground" />
+</adaptive-icon>
