@@ -68,7 +68,9 @@ public class ItemDetailFragment extends Fragment {
                     +"\n" +
                     "\nRecommender: " + mItem.recommender +
                     "\n" +
-                    "\nYear: " + mItem.year);
+                    "\nYear: " + mItem.year +
+                    "\n" +
+                    "\nStatus: " + mItem.status);
         }
 
         return rootView;

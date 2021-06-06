@@ -43,6 +43,13 @@ public class ReadingContent {
                     Status.TO_READ),
 
             new ReadingItem(
+                    "The Fashion Cookbook",
+                    "Hannah Martin",
+                    "CPR",
+                    2021,
+                    Status.OBTAIN),
+
+            new ReadingItem(
                     "Computers and Society",
                     "Lisa Kaczmarczyk",
                     "M. Goldweber",
