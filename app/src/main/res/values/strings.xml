@@ -6,4 +6,8 @@
     <string name="author_message">Enter Author</string>
     <string name="year_message">Year</string>
     <string name="recommender_message">Enter Recommender</string>
+    <string name="obtain">Obtain</string>
+    <string name="ToRead">To Read</string>
+    <string name="Read">Read</string>
+
 </resources>

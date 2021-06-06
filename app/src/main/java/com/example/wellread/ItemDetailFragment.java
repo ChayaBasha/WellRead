@@ -8,9 +8,13 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 /**
@@ -48,12 +52,24 @@ public class ItemDetailFragment extends Fragment {
             // to load content from a content provider.
             mItem = ReadingContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
+        }
+    }
 
-//    }  Activity activity = this.getActivity();
-//    CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-//            if (appBarLayout != null) {
-//        appBarLayout.setTitle(mItem.title);
-    }}
+    public void onRadioButtonClicked(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+        switch (view.getId()) {
+            case R.id.radio_obtain:
+                if (checked)
+                    break;
+            case R.id.radio_to_read:
+                if (checked)
+                    break;
+            case R.id.radio_read:
+                if (checked)
+                    break;
+
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,13 +80,13 @@ public class ItemDetailFragment extends Fragment {
         // Show the details in the detail screen; this should be made nicer and I need to add the
         // radio button too
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.item_detail)).setText("Author: " + mItem.author
-                    +"\n" +
+            ((TextView) rootView.findViewById(R.id.item_text_detail)).setText("Author: " + mItem.author
+                    + "\n" +
                     "\nRecommender: " + mItem.recommender +
                     "\n" +
                     "\nYear: " + mItem.year +
-                    "\n" +
-                    "\nStatus: " + mItem.status);
+                    "\n");
+            ((RadioGroup) rootView.findViewById(R.id.radio_button)).getCheckedRadioButtonId();
         }
 
         return rootView;
