@@ -16,24 +16,33 @@
     android:padding="16dp"
     android:textIsSelectable="true"
     android:textColor="@color/colorPrimaryDark"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Status:"
+        style="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorPrimaryDark"/>
 <RadioGroup
     android:id="@+id/radio_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
     <RadioButton android:id="@+id/radio_obtain"
+        style="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryDark"
         android:text="@string/obtain"
         android:onClick="onRadioButtonClicked"/>
     <RadioButton android:id="@+id/radio_to_read"
+        style="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryDark"
         android:text="@string/ToRead"
         android:onClick="onRadioButtonClicked"/>
     <RadioButton android:id="@+id/radio_read"
+        style="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryDark"
