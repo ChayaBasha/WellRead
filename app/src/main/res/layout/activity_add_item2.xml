@@ -13,7 +13,7 @@
         android:id="@+id/editTitle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:hint="@string/title_message"
         android:inputType="text"
          />
@@ -22,7 +22,7 @@
         android:id="@+id/editAuthor"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:hint="@string/author_message"
         android:inputType="text"
          />
@@ -31,7 +31,7 @@
         android:id="@+id/editYear"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:hint="@string/year_message"
         android:inputType="text"
         />
@@ -40,17 +40,61 @@
         android:id="@+id/editRecommender"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:hint="@string/recommender_message"
         android:inputType="text"
         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:text="Status:"
+        style="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorPrimaryDark"
+        android:paddingTop="16dp"/>
+    <RadioGroup
+        android:id="@+id/radio_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioButton android:id="@+id/radio_read"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/Read"
+            android:onClick="onRadioButtonClicked"
+            />
+
+        <RadioButton android:id="@+id/radio_to_read"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/ToRead"
+            android:onClick="onRadioButtonClicked"/>
+
+        <RadioButton android:id="@+id/radio_obtain"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/obtain"
+            android:onClick="onRadioButtonClicked"
+            />
+
+    </RadioGroup>
+
 
     <Button
         android:id="@+id/button"
         android:layout_width="100dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.4"
+        android:layout_gravity="center"
+        android:textColor="@color/cornsilk"
         android:text="Save"
+        android:background="@color/colorPrimary"
          />
 
 
