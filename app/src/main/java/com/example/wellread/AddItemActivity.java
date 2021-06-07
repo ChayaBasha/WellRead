@@ -5,10 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
-
 import androidx.appcompat.widget.Toolbar;
 
 public class AddItemActivity extends AppCompatActivity {
@@ -17,24 +18,22 @@ public class AddItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item2);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.add_item_toolbar);
+        toolbar.setTitle("Add Reading Item");
+        toolbar.setLogo(R.drawable.ic_launcher_book_foreground);
+        setSupportActionBar(toolbar);
 
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.add_item_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-            navigateUpTo(new Intent(this, ItemDetailActivity.class));
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void backToList(MenuItem action_back) {
+        Intent intent = new Intent(this, ItemListActivity.class);
+        startActivity(intent);
     }
 
     public void onRadioButtonClicked(View view) {

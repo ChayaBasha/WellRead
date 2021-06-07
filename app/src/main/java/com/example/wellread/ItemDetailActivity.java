@@ -33,9 +33,9 @@ public class ItemDetailActivity extends AppCompatActivity {
 
         // Show the Up button in the action bar.
 //        ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.setDisplayHomeAsUpEnabled(true);
-//        }
+////        if (actionBar != null) {
+////            actionBar.setDisplayHomeAsUpEnabled(true);
+////        }
 
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
@@ -70,6 +70,11 @@ public class ItemDetailActivity extends AppCompatActivity {
 //
 //        return super.onOptionsItemSelected(item);
 //    }
+
+    public void goBack(MenuItem action_back) {
+        Intent intent = new Intent (this, ItemListActivity.class);
+        startActivity(intent);
+    }
 @Override
     public void onStart() {
         super.onStart();

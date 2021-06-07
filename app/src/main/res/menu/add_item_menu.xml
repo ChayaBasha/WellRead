@@ -6,11 +6,5 @@
         android:icon="@drawable/ic_action_back"
         android:title="back"
         app:showAsAction="always"
-        android:onClick="goBack"/>
-    <item
-        android:id="@+id/action_deleteItem"
-        android:icon="@drawable/ic_action_delete_item"
-        android:title="delete item"
-        app:showAsAction="ifRoom" />
-
+        android:onClick="backToList"/>
 </menu>
