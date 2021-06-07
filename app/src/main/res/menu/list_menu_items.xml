@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_openMenu"
-        android:icon="@drawable/ic_action_open_menu"
-        android:title="open menu"
-        app:showAsAction="ifRoom"/>
+
     <item
         android:id="@+id/action_addReadingItem"
         android:icon="@drawable/ic_action_add_reading_item"
