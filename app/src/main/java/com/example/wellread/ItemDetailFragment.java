@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.example.wellread.reading.ReadingContent;
+import com.example.wellread.reading.Status;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import androidx.fragment.app.Fragment;
@@ -71,6 +72,7 @@ public class ItemDetailFragment extends Fragment {
                     "\n" +
                     "\nYear: " + mItem.year +
                     "\n");
+
             ((RadioGroup) rootView.findViewById(R.id.radio_button)).getCheckedRadioButtonId();
         }
 

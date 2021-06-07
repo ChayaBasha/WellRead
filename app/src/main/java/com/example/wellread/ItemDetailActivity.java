@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import com.example.wellread.reading.ReadingContent;
+import com.example.wellread.reading.Status;
 
 public class ItemDetailActivity extends AppCompatActivity {
 
@@ -53,23 +54,33 @@ public class ItemDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
             navigateUpTo(new Intent(this, ItemListActivity.class));
-
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+@Override
+    public void onStart() {
+        super.onStart();
+        String item_id = getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID);
+        ReadingContent.ReadingItem item = ReadingContent.ITEM_MAP.get(item_id);
+
+        if (item.status == Status.READ) {
+            RadioButton radioRead = (RadioButton) findViewById(R.id.radio_read);
+            radioRead.setChecked(true);
+        } else if (item.status == Status.TO_READ) {
+            RadioButton radioToRead = (RadioButton) findViewById(R.id.radio_to_read);
+            radioToRead.setChecked(true);
+        } else  {
+            RadioButton radioObtain = (RadioButton) findViewById(R.id.radio_obtain);
+            radioObtain.setChecked(true);
+        }
+    }
 
     public void onRadioButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
+
         switch (view.getId()) {
             case R.id.radio_obtain:
                 if (checked)

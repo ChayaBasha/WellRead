@@ -50,6 +50,13 @@ public class ReadingContent {
                     Status.OBTAIN),
 
             new ReadingItem(
+                    "The Hitch Hiker's Guide to the Galaxy",
+                    "Douglas Adams",
+                    "R. Blumenthal",
+                    1978,
+                    Status.READ),
+
+            new ReadingItem(
                     "Computers and Society",
                     "Lisa Kaczmarczyk",
                     "M. Goldweber",
