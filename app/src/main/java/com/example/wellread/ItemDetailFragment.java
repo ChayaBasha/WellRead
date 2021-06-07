@@ -55,21 +55,6 @@ public class ItemDetailFragment extends Fragment {
         }
     }
 
-    public void onRadioButtonClicked(View view) {
-        boolean checked = ((RadioButton) view).isChecked();
-        switch (view.getId()) {
-            case R.id.radio_obtain:
-                if (checked)
-                    break;
-            case R.id.radio_to_read:
-                if (checked)
-                    break;
-            case R.id.radio_read:
-                if (checked)
-                    break;
-
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
