@@ -1,10 +1,12 @@
 package com.example.wellread.reading;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 
 /**
@@ -12,7 +14,9 @@ import java.util.Map;
  * Ideally this would be created by the User
  * This is just an example for now
  */
-public class ReadingContent {
+public class ReadingContent implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
 
     /**
@@ -28,12 +32,7 @@ public class ReadingContent {
 
     //    private static final int COUNT = 25;
     private static ArrayList<ReadingItem> SAMPLEDATA = new ArrayList<ReadingItem>(Arrays.asList(
-            new ReadingItem(
-                    "Design Patterns",
-                    "Gang of Four",
-                    "R. Blumenthal",
-                    1995,
-                    Status.TO_READ),
+
 
             new ReadingItem(
                     "Bleakhouse",
@@ -42,12 +41,7 @@ public class ReadingContent {
                     1852,
                     Status.TO_READ),
 
-            new ReadingItem(
-                    "The Fashion Cookbook",
-                    "Hannah Martin",
-                    "CPR",
-                    2021,
-                    Status.OBTAIN),
+
 
             new ReadingItem(
                     "The Hitch Hiker's Guide to the Galaxy",
@@ -71,7 +65,6 @@ public class ReadingContent {
 
     private static void addItem(ReadingItem item) {
         ITEMS.add(item);
-        item.id = String.valueOf(ITEMS.size());
         ITEM_MAP.put(item.id, item);
     }
 
@@ -80,18 +73,22 @@ public class ReadingContent {
      * A reading item representing a work that was recommended to the user.
      */
     public static class ReadingItem {
-        public String id = "";
-        public final String title;
-        public final String author;
-        public final String recommender;
-        public final Integer year;
-        public final Status status;
+        public UUID id;
+        public String title;
+        public String author;
+        public String recommender;
+        public Integer year;
+        public Status status;
 
+        /**
+         * This is the constructor for the Reading Item
+         */
         public ReadingItem(String title,
                            String author,
                            String recommender,
                            Integer year,
                            Status status) {
+            this.id = UUID.randomUUID();
             this.title = title;
             this.author = author;
             this.recommender = recommender;
@@ -99,5 +96,7 @@ public class ReadingContent {
             this.status = status;
         }
 
+
     }
+
 }

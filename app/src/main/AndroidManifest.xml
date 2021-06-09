@@ -12,7 +12,6 @@
         <activity
             android:name=".AddItemActivity"
             android:theme="@style/AppTheme.NoActionBar">
-
         </activity>
         <activity
             android:name=".ItemListActivity"
