@@ -10,6 +10,7 @@ import com.example.wellread.reading.Status;
 import junit.framework.TestCase;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.UUID;
@@ -19,10 +20,16 @@ public class readingItemSvcImplTest extends TestCase {
     private ServiceFactory serviceFactory;
     private ReadingContent.ReadingItem readingItem1;
     private ReadingContent.ReadingItem readingItem2;
+    private ReadingContent.ReadingItem readingItem3;
+    private ReadingContent.ReadingItem readingItem4;
 
-    @Before
+    @BeforeClass
     protected void setUp() throws Exception {
         serviceFactory = ServiceFactory.getInstance();
+    }
+
+    @Test
+    public void testCreateReadingItem() {
 
         readingItem1 = new ReadingContent.ReadingItem(
                 "Design Patterns",
@@ -31,23 +38,10 @@ public class readingItemSvcImplTest extends TestCase {
                 1995,
                 Status.TO_READ);
 
-        System.out.println(readingItem1.id + " " + readingItem1.title);
-
-        readingItem2 = new ReadingContent.ReadingItem(
-                "The Fashion Cookbook",
-                "Hannah Martin",
-                "CPR",
-                2021,
-                Status.OBTAIN);
-    }
-
-    @Test
-    public void testCreateReadingItem() {
         try {
             IReadingListSvc readingListService = (IReadingListSvc) serviceFactory.getService(IReadingListSvc.NAME);
             readingListService.createReadingItem(readingItem1);
             System.out.println("test Create Reading Item passed" + readingItem1.id);
-            System.out.println(readingItem1.id.toString());
 
         } catch (ServiceLoadException e) {
             e.printStackTrace();
@@ -78,10 +72,19 @@ public class readingItemSvcImplTest extends TestCase {
     @Test
     public void testGetReadingItemById() {
 
-        String readingItemId = readingItem1.id;
+        readingItem2 = new ReadingContent.ReadingItem(
+                "The Fashion Cookbook",
+                "Hannah Martin",
+                "CPR",
+                2021,
+                Status.OBTAIN);
+
+        String readingItemId = readingItem2.id;
+
 
         try {
             IReadingListSvc readingListService = (IReadingListSvc) serviceFactory.getService(IReadingListSvc.NAME);
+            readingListService.createReadingItem(readingItem2);
             readingListService.getReadingItemById(readingItemId);
             System.out.println("test get Reading Item By ID passed");
         } catch (ServiceLoadException e) {
@@ -96,9 +99,17 @@ public class readingItemSvcImplTest extends TestCase {
     @Test
     public void testUpdateReadingItem() {
 
+        readingItem3 = new ReadingContent.ReadingItem(
+                "Bleakhouse",
+                "Charles Dickens",
+                "Prof Thomas",
+                1852,
+                Status.TO_READ);
+
         try {
             IReadingListSvc readingListService = (IReadingListSvc) serviceFactory.getService(IReadingListSvc.NAME);
-            readingListService.updateReadingItem(readingItem1);
+            readingListService.createReadingItem(readingItem3);
+            readingListService.updateReadingItem(readingItem3);
             System.out.println("test update Reading Item By ID passed");
         } catch (ServiceLoadException e) {
             e.printStackTrace();
@@ -112,9 +123,17 @@ public class readingItemSvcImplTest extends TestCase {
     @Test
     public void testDeleteReadingItem() {
 
+        readingItem4 =  new ReadingContent.ReadingItem(
+                "The Hitch Hiker's Guide to the Galaxy",
+                "Douglas Adams",
+                "R. Blumenthal",
+                1978,
+                Status.READ);
+
         try {
             IReadingListSvc readingListService = (IReadingListSvc) serviceFactory.getService(IReadingListSvc.NAME);
-            readingListService.deleteReadingItem(readingItem1);
+            readingListService.createReadingItem(readingItem4);
+            readingListService.deleteReadingItem(readingItem4);
             System.out.println("test delete Reading Item passed");
         } catch (ServiceLoadException e) {
             e.printStackTrace();

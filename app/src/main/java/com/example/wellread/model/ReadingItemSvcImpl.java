@@ -105,7 +105,7 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
     public void deleteReadingItem(ReadingContent.ReadingItem readingItem) throws readingItemException {
         if (readingItem != null) {
 
-            File existingReadingItem = readingItemFolder.toPath().resolve(readingItem.id + ".itinerary.out")
+            File existingReadingItem = readingItemFolder.toPath().resolve(readingItem.id + ".readingItem.out")
                     .toFile();
             if (existingReadingItem.exists()) {
                 existingReadingItem.delete();
