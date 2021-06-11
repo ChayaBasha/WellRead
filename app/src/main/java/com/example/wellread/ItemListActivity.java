@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.wellread.reading.ReadingContent;
+import com.example.wellread.reading.ReadingItem;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -81,12 +82,12 @@ public class ItemListActivity extends AppCompatActivity {
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         private final ItemListActivity mParentActivity;
-        private final List<ReadingContent.ReadingItem> mValues;
+        private final List<ReadingItem> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ReadingContent.ReadingItem item = (ReadingContent.ReadingItem) view.getTag();
+                ReadingItem item = (ReadingItem) view.getTag();
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
                     arguments.putString(ItemDetailFragment.ARG_ITEM_ID, item.id);
@@ -106,7 +107,7 @@ public class ItemListActivity extends AppCompatActivity {
         };
 
         SimpleItemRecyclerViewAdapter(ItemListActivity parent,
-                                      List<ReadingContent.ReadingItem> items,
+                                      List<ReadingItem> items,
                                       boolean twoPane) {
             mValues = items;
             mParentActivity = parent;

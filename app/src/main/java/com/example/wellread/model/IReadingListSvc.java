@@ -1,6 +1,6 @@
 package com.example.wellread.model;
 
-import com.example.wellread.reading.ReadingContent;
+import com.example.wellread.reading.ReadingItem;
 
 import java.util.List;
 import java.util.UUID;
@@ -9,9 +9,9 @@ public interface IReadingListSvc extends IService{
 
     public final String NAME = "IReadingSvc";
 
-    public void createReadingItem(ReadingContent.ReadingItem readingItem) throws readingItemException;
-    public List<ReadingContent.ReadingItem> getAllReadingItems() throws readingItemException;
-    public ReadingContent.ReadingItem getReadingItemById(String readingItemId) throws readingItemException;
-    public void updateReadingItem(ReadingContent.ReadingItem readingItem) throws readingItemException;
-    public void deleteReadingItem(ReadingContent.ReadingItem readingItem) throws readingItemException;
+    public void createReadingItem(ReadingItem readingItem) throws readingItemException;
+    public List<ReadingItem> getAllReadingItems() throws readingItemException;
+    public ReadingItem getReadingItemById(String readingItemId) throws readingItemException;
+    public void updateReadingItem(ReadingItem readingItem) throws readingItemException;
+    public void deleteReadingItem(ReadingItem readingItem) throws readingItemException;
 }

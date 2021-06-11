@@ -1,6 +1,6 @@
 package com.example.wellread.model;
 
-import com.example.wellread.reading.ReadingContent;
+import com.example.wellread.reading.ReadingItem;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +17,7 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
     private File readingItemFolder = new File("readingItems");
 
     @Override
-    public void createReadingItem(ReadingContent.ReadingItem readingItem) throws readingItemException {
+    public void createReadingItem(ReadingItem readingItem) throws readingItemException {
         if (readingItem != null) {
             try {
                 readingItemFolder.mkdirs();
@@ -36,8 +36,8 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
     }
 
     @Override
-    public List<ReadingContent.ReadingItem> getAllReadingItems() throws readingItemException {
-        List<ReadingContent.ReadingItem> readingItems = new ArrayList<ReadingContent.ReadingItem>();
+    public List<ReadingItem> getAllReadingItems() throws readingItemException {
+        List<ReadingItem> readingItems = new ArrayList<ReadingItem>();
         if (this.readingItemFolder.isDirectory()) {
             for (File file : this.readingItemFolder.listFiles()) {
                 if (file.isFile()) {
@@ -45,8 +45,8 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
                         ObjectInputStream readReadingItems = new ObjectInputStream(new FileInputStream(file));
                         Object fileContents = readReadingItems.readObject();
                         readReadingItems.close();
-                        if (fileContents instanceof ReadingContent.ReadingItem) {
-                            readingItems.add((ReadingContent.ReadingItem) fileContents);
+                        if (fileContents instanceof ReadingItem) {
+                            readingItems.add((ReadingItem) fileContents);
                         } else
                             throw new readingItemException(
                                     "file contents are not a reading Item " + file.getAbsolutePath());
@@ -66,12 +66,12 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
 
 
     @Override
-    public ReadingContent.ReadingItem getReadingItemById(String readingItemId) throws readingItemException {
+    public ReadingItem getReadingItemById(String readingItemId) throws readingItemException {
 
 //        String ReadingItemId = readingItem1.id;
 
-        List<ReadingContent.ReadingItem> readingItems = getAllReadingItems();
-        ReadingContent.ReadingItem readingItem = null;
+        List<ReadingItem> readingItems = getAllReadingItems();
+        ReadingItem readingItem = null;
         for (int i = 0; i < readingItems.size(); i++) {
 
             if (readingItems.get(i).id.equals(readingItemId)) {
@@ -87,8 +87,8 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
     }
 
     @Override
-    public void updateReadingItem(ReadingContent.ReadingItem readingItem) throws readingItemException {
-        ReadingContent.ReadingItem existingReadingItem = this.getReadingItemById(readingItem.id);
+    public void updateReadingItem(ReadingItem readingItem) throws readingItemException {
+        ReadingItem existingReadingItem = this.getReadingItemById(readingItem.id);
         if (existingReadingItem != null) {
 
             existingReadingItem.title = readingItem.title;
@@ -102,7 +102,7 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
     }
 
     @Override
-    public void deleteReadingItem(ReadingContent.ReadingItem readingItem) throws readingItemException {
+    public void deleteReadingItem(ReadingItem readingItem) throws readingItemException {
         if (readingItem != null) {
 
             File existingReadingItem = readingItemFolder.toPath().resolve(readingItem.id + ".readingItem.out")

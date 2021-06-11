@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.example.wellread.reading.ReadingContent;
+import com.example.wellread.reading.ReadingItem;
 import com.example.wellread.reading.Status;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
@@ -34,7 +35,7 @@ public class ItemDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private ReadingContent.ReadingItem mItem;
+    private ReadingItem mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the

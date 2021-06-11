@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import com.example.wellread.reading.ReadingContent;
+import com.example.wellread.reading.ReadingItem;
 import com.example.wellread.reading.Status;
 
 public class ItemDetailActivity extends AppCompatActivity {
@@ -25,7 +26,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         String item_id = getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID);
-        ReadingContent.ReadingItem item = ReadingContent.ITEM_MAP.get(item_id);
+        ReadingItem item = ReadingContent.ITEM_MAP.get(item_id);
         toolbar.setTitle(item.title);
         toolbar.setLogo(R.drawable.ic_launcher_book_foreground);
         setSupportActionBar(toolbar);
@@ -79,7 +80,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         String item_id = getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID);
-        ReadingContent.ReadingItem item = ReadingContent.ITEM_MAP.get(item_id);
+        ReadingItem item = ReadingContent.ITEM_MAP.get(item_id);
 
         if (item.status == Status.READ) {
             RadioButton radioRead = (RadioButton) findViewById(R.id.radio_read);
