@@ -42,14 +42,14 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
             for (File file : this.readingItemFolder.listFiles()) {
                 if (file.isFile()) {
                     try {
-                        ObjectInputStream readItineraries = new ObjectInputStream(new FileInputStream(file));
-                        Object fileContents = readItineraries.readObject();
-                        readItineraries.close();
+                        ObjectInputStream readReadingItems = new ObjectInputStream(new FileInputStream(file));
+                        Object fileContents = readReadingItems.readObject();
+                        readReadingItems.close();
                         if (fileContents instanceof ReadingContent.ReadingItem) {
                             readingItems.add((ReadingContent.ReadingItem) fileContents);
                         } else
                             throw new readingItemException(
-                                    "file contents are not an itinerary " + file.getAbsolutePath());
+                                    "file contents are not a reading Item " + file.getAbsolutePath());
                     } catch (IOException e) {
                         throw new readingItemException("IO problems " + file.getAbsolutePath());
                     } catch (ClassNotFoundException e) {
@@ -66,10 +66,12 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
 
 
     @Override
-    public ReadingContent.ReadingItem getReadingItemById(UUID readingItemId) throws readingItemException {
-        ReadingContent.ReadingItem readingItem = null;
-        List<ReadingContent.ReadingItem> readingItems = getAllReadingItems();
+    public ReadingContent.ReadingItem getReadingItemById(String readingItemId) throws readingItemException {
 
+//        String ReadingItemId = readingItem1.id;
+
+        List<ReadingContent.ReadingItem> readingItems = getAllReadingItems();
+        ReadingContent.ReadingItem readingItem = null;
         for (int i = 0; i < readingItems.size(); i++) {
 
             if (readingItems.get(i).id.equals(readingItemId)) {
@@ -79,7 +81,7 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
         }
 
         if (readingItem == null) {
-            throw new readingItemException("no reading item for user with Id " + readingItemId);
+            throw new readingItemException("no reading item with Id " + readingItemId);
         } else
             return readingItem;
     }

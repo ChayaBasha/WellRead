@@ -11,7 +11,7 @@ public interface IReadingListSvc extends IService{
 
     public void createReadingItem(ReadingContent.ReadingItem readingItem) throws readingItemException;
     public List<ReadingContent.ReadingItem> getAllReadingItems() throws readingItemException;
-    public ReadingContent.ReadingItem getReadingItemById(UUID readingItemId) throws readingItemException;
+    public ReadingContent.ReadingItem getReadingItemById(String readingItemId) throws readingItemException;
     public void updateReadingItem(ReadingContent.ReadingItem readingItem) throws readingItemException;
     public void deleteReadingItem(ReadingContent.ReadingItem readingItem) throws readingItemException;
 }

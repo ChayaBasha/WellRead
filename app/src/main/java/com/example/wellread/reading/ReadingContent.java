@@ -1,5 +1,10 @@
 package com.example.wellread.reading;
 
+import com.example.wellread.model.IReadingListSvc;
+import com.example.wellread.model.IService;
+import com.example.wellread.model.ServiceFactory;
+import com.example.wellread.model.ServiceLoadException;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,10 +23,6 @@ public class ReadingContent implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
-    /**
-     * An array of sample reading items.
-     */
     public static final List<ReadingItem> ITEMS = new ArrayList<ReadingItem>();
 
 
@@ -32,7 +33,12 @@ public class ReadingContent implements Serializable {
 
     //    private static final int COUNT = 25;
     private static ArrayList<ReadingItem> SAMPLEDATA = new ArrayList<ReadingItem>(Arrays.asList(
-
+            new ReadingItem(
+                    "Design Patterns",
+                    "Gang of Four",
+                    "R. Blumenthal",
+                    1995,
+                    Status.TO_READ),
 
             new ReadingItem(
                     "Bleakhouse",
@@ -41,7 +47,12 @@ public class ReadingContent implements Serializable {
                     1852,
                     Status.TO_READ),
 
-
+            new ReadingItem(
+                    "The Fashion Cookbook",
+                    "Hannah Martin",
+                    "CPR",
+                    2021,
+                    Status.OBTAIN),
 
             new ReadingItem(
                     "The Hitch Hiker's Guide to the Galaxy",
@@ -72,8 +83,9 @@ public class ReadingContent implements Serializable {
     /**
      * A reading item representing a work that was recommended to the user.
      */
-    public static class ReadingItem {
-        public UUID id;
+    public static class ReadingItem implements Serializable {
+        private static final long serialVersionUID = 1L;
+        public String id;
         public String title;
         public String author;
         public String recommender;
@@ -88,7 +100,7 @@ public class ReadingContent implements Serializable {
                            String recommender,
                            Integer year,
                            Status status) {
-            this.id = UUID.randomUUID();
+            this.id = UUID.randomUUID().toString();
             this.title = title;
             this.author = author;
             this.recommender = recommender;

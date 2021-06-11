@@ -22,7 +22,8 @@ public class ServiceFactory {
             Class<?> c = Class.forName(getImplName(serviceName));
             return (IService) c.newInstance();
         } catch (Exception e) {
-            throw new ServiceLoadException(serviceName + "not loaded");
+            e.printStackTrace();
+            throw new ServiceLoadException(serviceName + " not loaded");
         }
     }
 
