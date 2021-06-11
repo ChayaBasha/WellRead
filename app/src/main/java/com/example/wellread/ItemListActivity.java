@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.wellread.model.ServiceLoadException;
+import com.example.wellread.model.readingItemException;
 import com.example.wellread.reading.ReadingContent;
 import com.example.wellread.reading.ReadingItem;
 
@@ -66,7 +68,13 @@ public class ItemListActivity extends AppCompatActivity {
 
         View recyclerView = findViewById(R.id.item_list);
         assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);
+        try {
+            setupRecyclerView((RecyclerView) recyclerView);
+        } catch (ServiceLoadException e) {
+            e.printStackTrace();
+        } catch (readingItemException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addReadingItem(MenuItem action_addReadingItem) {
@@ -74,8 +82,8 @@ public class ItemListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, ReadingContent.ITEMS, mTwoPane));
+    private void setupRecyclerView(@NonNull RecyclerView recyclerView) throws ServiceLoadException, readingItemException {
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, ReadingContent.getReadingItems(), mTwoPane));
     }
 
     public static class SimpleItemRecyclerViewAdapter

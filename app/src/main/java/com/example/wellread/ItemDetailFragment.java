@@ -3,6 +3,8 @@ package com.example.wellread;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.example.wellread.model.ServiceLoadException;
+import com.example.wellread.model.readingItemException;
 import com.example.wellread.reading.ReadingContent;
 import com.example.wellread.reading.ReadingItem;
 import com.example.wellread.reading.Status;
@@ -52,7 +54,13 @@ public class ItemDetailFragment extends Fragment {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = ReadingContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            try {
+                mItem = ReadingContent.getItemMap().get(getArguments().getString(ARG_ITEM_ID));
+            } catch (ServiceLoadException e) {
+                e.printStackTrace();
+            } catch (readingItemException e) {
+                e.printStackTrace();
+            }
 
         }
     }

@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 
+import com.example.wellread.model.ServiceLoadException;
+import com.example.wellread.model.readingItemException;
 import com.example.wellread.reading.ReadingContent;
 import com.example.wellread.reading.ReadingItem;
 import com.example.wellread.reading.Status;
@@ -26,7 +28,14 @@ public class ItemDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         String item_id = getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID);
-        ReadingItem item = ReadingContent.ITEM_MAP.get(item_id);
+        ReadingItem item = null;
+        try {
+            item = ReadingContent.getItemMap().get(item_id);
+        } catch (ServiceLoadException e) {
+            e.printStackTrace();
+        } catch (readingItemException e) {
+            e.printStackTrace();
+        }
         toolbar.setTitle(item.title);
         toolbar.setLogo(R.drawable.ic_launcher_book_foreground);
         setSupportActionBar(toolbar);
@@ -61,17 +70,6 @@ public class ItemDetailActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//        if (id == android.R.id.home) {
-//            navigateUpTo(new Intent(this, ItemListActivity.class));
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
     public void goBack(MenuItem action_back) {
         Intent intent = new Intent (this, ItemListActivity.class);
         startActivity(intent);
@@ -80,9 +78,16 @@ public class ItemDetailActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         String item_id = getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID);
-        ReadingItem item = ReadingContent.ITEM_MAP.get(item_id);
+    ReadingItem item = null;
+    try {
+        item = ReadingContent.getItemMap().get(item_id);
+    } catch (ServiceLoadException e) {
+        e.printStackTrace();
+    } catch (readingItemException e) {
+        e.printStackTrace();
+    }
 
-        if (item.status == Status.READ) {
+    if (item.status == Status.READ) {
             RadioButton radioRead = (RadioButton) findViewById(R.id.radio_read);
             radioRead.setChecked(true);
         } else if (item.status == Status.TO_READ) {
