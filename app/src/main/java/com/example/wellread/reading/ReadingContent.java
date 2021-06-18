@@ -24,7 +24,7 @@ public class ReadingContent implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private static ServiceFactory serviceFactory = ServiceFactory.getInstance(null);
 
     protected static IService getService(String serviceName) throws ServiceLoadException {
         return serviceFactory.getService(serviceName);

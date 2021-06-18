@@ -1,29 +1,39 @@
 package com.example.wellread.model;
 
+import android.content.Context;
+
 import com.example.wellread.reading.ReadingItem;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 public class ReadingItemSvcImpl implements IReadingListSvc {
 
-    private File readingItemFolder = new File("readingItems");
+    private Context context = ServiceFactory.getInstance(null).context;
+    private final String readingItemFolder = "readingItemFolder.sio";
+
+//    private File readingItemFolder = new File("readingItems");
+
 
     @Override
     public void createReadingItem(ReadingItem readingItem) throws readingItemException {
         if (readingItem != null) {
             try {
-                readingItemFolder.mkdirs();
-                ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(
-                        readingItemFolder.toPath().resolve((readingItem.id + ".readingItem.out")).toFile()
-                ));
+//                readingItemFolder.mkdirs();
+
+                ObjectOutputStream output = new ObjectOutputStream(context.openFileOutput(readingItemFolder, Context.MODE_PRIVATE));
+//                ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(
+//                        readingItemFolder.toPath().resolve((readingItem.id + ".readingItem.out")).toFile()
+//                ));
 
                 output.writeObject(readingItem);
                 output.flush();
@@ -35,34 +45,49 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
             throw new readingItemException("cannot save empty reading item");
     }
 
+
+
     @Override
     public List<ReadingItem> getAllReadingItems() throws readingItemException {
-        List<ReadingItem> readingItems = new ArrayList<ReadingItem>();
-        if (this.readingItemFolder.isDirectory()) {
-            for (File file : this.readingItemFolder.listFiles()) {
-                if (file.isFile()) {
-                    try {
-                        ObjectInputStream readReadingItems = new ObjectInputStream(new FileInputStream(file));
-                        Object fileContents = readReadingItems.readObject();
-                        readReadingItems.close();
-                        if (fileContents instanceof ReadingItem) {
-                            readingItems.add((ReadingItem) fileContents);
-                        } else
-                            throw new readingItemException(
-                                    "file contents are not a reading Item " + file.getAbsolutePath());
-                    } catch (IOException e) {
-                        throw new readingItemException("IO problems " + file.getAbsolutePath());
-                    } catch (ClassNotFoundException e) {
-                        throw new readingItemException("class not found");
-                    }
-                } else
-                    throw new readingItemException("not a file :-( " + file.getAbsolutePath());
-            }
-        } else
-            throw new readingItemException(
-                    "can't find directory itineraryFolder " + this.readingItemFolder.getAbsolutePath());
+        List<ReadingItem> readingItems = new ArrayList<>();
+        try {
+            ObjectInputStream readReadingItems = new ObjectInputStream(context.openFileInput(readingItemFolder));
+            Object fileContents = readReadingItems.readObject();
+            readReadingItems.close();
+           readingItems.addAll((Collection<? extends ReadingItem>) fileContents);
+        } catch (IOException e) {
+            throw new readingItemException("I/O problems; can't read readingItems" + context.getFileStreamPath(readingItemFolder));
+        } catch (ClassNotFoundException e) {
+            throw new readingItemException(("Class not found exception"));
+        }
         return readingItems;
     }
+//        List<ReadingItem> readingItems = new ArrayList<ReadingItem>();
+//        if (this.readingItemFolder.isDirectory()) {
+//            for (File file : this.readingItemFolder.listFiles()) {
+//                if (file.isFile()) {
+//                    try {
+//                        ObjectInputStream readReadingItems = new ObjectInputStream(new FileInputStream(file));
+//                        Object fileContents = readReadingItems.readObject();
+//                        readReadingItems.close();
+//                        if (fileContents instanceof ReadingItem) {
+//                            readingItems.add((ReadingItem) fileContents);
+//                        } else
+//                            throw new readingItemException(
+//                                    "file contents are not a reading Item " + file.getAbsolutePath());
+//                    } catch (IOException e) {
+//                        throw new readingItemException("IO problems " + file.getAbsolutePath());
+//                    } catch (ClassNotFoundException e) {
+//                        throw new readingItemException("class not found");
+//                    }
+//                } else
+//                    throw new readingItemException("not a file :-( " + file.getAbsolutePath());
+//            }
+//        } else
+//            throw new readingItemException(
+//                    "can't find directory Reading Items Folder " + this.readingItemFolder.getAbsolutePath());
+//        return readingItems;
+//    }
 
 
     @Override
@@ -103,18 +128,20 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
 
     @Override
     public void deleteReadingItem(ReadingItem readingItem) throws readingItemException {
-        if (readingItem != null) {
 
-            File existingReadingItem = readingItemFolder.toPath().resolve(readingItem.id + ".readingItem.out")
-                    .toFile();
-            if (existingReadingItem.exists()) {
-                existingReadingItem.delete();
-            } else
-                throw new readingItemException(
-                        "could not delete " + readingItem.id);
-
-        } else
-            throw new readingItemException(" null input");
+//        if (readingItem != null) {
+//            ReadingItem existingReadingItem = this.getReadingItemById(readingItem.id);
+//            context.deleteFile(existingReadingItem);
+////            File existingReadingItem = context.getFileStreamPath()readingItemFolder.toPath().resolve(readingItem.id + ".readingItem.out")
+//                    .toFile();
+//            if (existingReadingItem.exists()) {
+//                existingReadingItem.delete();
+//            } else
+//                throw new readingItemException(
+//                        "could not delete " + readingItem.id);
+//
+//        } else
+//            throw new readingItemException(" null input");
 
     }
 }

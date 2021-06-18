@@ -4,24 +4,24 @@ import com.example.wellread.model.IReadingListSvc;
 import com.example.wellread.model.ServiceFactory;
 import com.example.wellread.model.ServiceLoadException;
 import com.example.wellread.model.readingItemException;
-import com.example.wellread.reading.ReadingContent;
+import com.example.wellread.reading.ReadingItem;
 import com.example.wellread.reading.Status;
 
 import junit.framework.TestCase;
 
-import org.junit.Before;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.UUID;
+
 
 public class readingItemSvcImplTest extends TestCase {
 
     private ServiceFactory serviceFactory;
-    private ReadingContent.ReadingItem readingItem1;
-    private ReadingContent.ReadingItem readingItem2;
-    private ReadingContent.ReadingItem readingItem3;
-    private ReadingContent.ReadingItem readingItem4;
+    private ReadingItem readingItem1;
+    private ReadingItem readingItem2;
+    private ReadingItem readingItem3;
+    private ReadingItem readingItem4;
 
     @BeforeClass
     protected void setUp() throws Exception {
@@ -31,7 +31,7 @@ public class readingItemSvcImplTest extends TestCase {
     @Test
     public void testCreateReadingItem() {
 
-        readingItem1 = new ReadingContent.ReadingItem(
+        readingItem1 = new ReadingItem(
                 "Design Patterns",
                 "Gang of Four",
                 "R. Blumenthal",
@@ -72,7 +72,7 @@ public class readingItemSvcImplTest extends TestCase {
     @Test
     public void testGetReadingItemById() {
 
-        readingItem2 = new ReadingContent.ReadingItem(
+        readingItem2 = new ReadingItem(
                 "The Fashion Cookbook",
                 "Hannah Martin",
                 "CPR",
@@ -99,7 +99,7 @@ public class readingItemSvcImplTest extends TestCase {
     @Test
     public void testUpdateReadingItem() {
 
-        readingItem3 = new ReadingContent.ReadingItem(
+        readingItem3 = new ReadingItem(
                 "Bleakhouse",
                 "Charles Dickens",
                 "Prof Thomas",
@@ -123,7 +123,7 @@ public class readingItemSvcImplTest extends TestCase {
     @Test
     public void testDeleteReadingItem() {
 
-        readingItem4 =  new ReadingContent.ReadingItem(
+        readingItem4 =  new ReadingItem(
                 "The Hitch Hiker's Guide to the Galaxy",
                 "Douglas Adams",
                 "R. Blumenthal",

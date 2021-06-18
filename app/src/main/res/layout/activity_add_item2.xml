@@ -118,6 +118,7 @@
         android:layout_weight="0.3"
         android:background="@color/colorPrimary"
         android:text="Save"
+        android:onClick="saveReadingItem"
         android:textColor="@color/cornsilk" />
 
 
