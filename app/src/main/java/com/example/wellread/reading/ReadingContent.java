@@ -42,7 +42,6 @@ public class ReadingContent implements Serializable {
 
     //    private static final int COUNT = 25;
     public static List<ReadingItem> getReadingItems() throws ServiceLoadException, readingItemException {
-        System.out.println("getReadingItems from Readonging Content. java was called");
         IReadingListSvc readingListService = readingService();
         List<ReadingItem> SAMPLE_DATA = new ArrayList<ReadingItem>(
                 readingListService.getAllReadingItems()
@@ -60,6 +59,12 @@ public class ReadingContent implements Serializable {
         }
 
         return itemMap;
+    }
+
+    public static void addReadingItem(ReadingItem newReadingItem) throws ServiceLoadException, readingItemException {
+
+        IReadingListSvc readingListService = readingService();
+        readingListService.createReadingItem(newReadingItem);
     }
 
 

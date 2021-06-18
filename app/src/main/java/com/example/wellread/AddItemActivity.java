@@ -9,10 +9,20 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.wellread.model.ServiceFactory;
+import com.example.wellread.model.ServiceLoadException;
+import com.example.wellread.model.readingItemException;
+import com.example.wellread.reading.ReadingContent;
+import com.example.wellread.reading.ReadingItem;
+import com.example.wellread.reading.Status;
+
 public class AddItemActivity extends AppCompatActivity {
+
+    private Status selectedStatus = Status.OBTAIN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +51,40 @@ public class AddItemActivity extends AppCompatActivity {
 
         switch (view.getId()) {
             case R.id.radio_obtain:
-                if (checked)
+                if (checked){
+                    selectedStatus = Status.OBTAIN;
+                }
                     break;
             case R.id.radio_to_read:
-                if (checked)
+                if (checked){
+                    selectedStatus = Status.TO_READ;
+                }
                     break;
             case R.id.radio_read:
-                if (checked)
+                if (checked){
+                    selectedStatus = Status.READ;
+                }
                     break;
 
         }
+    }
+
+    public void saveReadingItem(View view) throws ServiceLoadException, readingItemException {
+        Intent intent = new Intent(this, ItemListActivity.class);
+        EditText editTitle = (EditText) findViewById(R.id.editTitle);
+        EditText editAuthor = (EditText) findViewById(R.id.editAuthor);
+        EditText editYear = (EditText) findViewById(R.id.editYear);
+        EditText editRecommender = (EditText) findViewById(R.id.editRecommender);
+
+        ReadingItem newReadingItem = new ReadingItem(
+                editTitle.getText().toString(),
+                editAuthor.getText().toString(),
+                editRecommender.getText().toString(),
+                Integer.parseInt(editYear.getText().toString()),
+                selectedStatus
+        );
+
+        ReadingContent.addReadingItem(newReadingItem);
     }
 
 

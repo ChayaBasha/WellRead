@@ -2,6 +2,8 @@ package com.example.wellread.model;
 
 import android.content.Context;
 
+import androidx.annotation.RequiresPermission;
+
 import com.example.wellread.reading.ReadingItem;
 
 import java.io.File;
@@ -20,43 +22,52 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
 
     private Context context = ServiceFactory.getInstance(null).context;
     private final String readingItemFolder = "readingItemFolder.sio";
+    private ArrayList<ReadingItem> readingItems;
 
 //    private File readingItemFolder = new File("readingItems");
 
 
-    @Override
-    public void createReadingItem(ReadingItem readingItem) throws readingItemException {
-        if (readingItem != null) {
-            try {
+    public void writeFile() throws readingItemException {
+        try {
+
+            FileOutputStream fos = context.openFileOutput(readingItemFolder, Context.MODE_PRIVATE);
 //                readingItemFolder.mkdirs();
 
-                ObjectOutputStream output = new ObjectOutputStream(context.openFileOutput(readingItemFolder, Context.MODE_PRIVATE));
+            ObjectOutputStream output = new ObjectOutputStream(fos);
 //                ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(
 //                        readingItemFolder.toPath().resolve((readingItem.id + ".readingItem.out")).toFile()
 //                ));
 
-                output.writeObject(readingItem);
-                output.flush();
-                output.close();
-            } catch (IOException e) {
-                throw new readingItemException("cannot save reading item");
-            }
-        } else
-            throw new readingItemException("cannot save empty reading item");
+            output.writeObject(readingItems);
+//                output.flush();
+            output.close();
+        } catch (IOException e) {
+            throw new readingItemException("cannot save reading item");
+        }
     }
 
+
+    public void createReadingItem(ReadingItem readingItem) throws readingItemException {
+        readingItems.add(readingItem);
+        writeFile();
+    }
 
 
     @Override
     public List<ReadingItem> getAllReadingItems() throws readingItemException {
+
         List<ReadingItem> readingItems = new ArrayList<>();
         try {
-            ObjectInputStream readReadingItems = new ObjectInputStream(context.openFileInput(readingItemFolder));
-            Object fileContents = readReadingItems.readObject();
-            readReadingItems.close();
-           readingItems.addAll((Collection<? extends ReadingItem>) fileContents);
+            File file = new File(context.getFilesDir(), readingItemFolder);
+            if (file.exists()) {
+                FileInputStream fis = context.openFileInput(readingItemFolder);
+                ObjectInputStream readReadingItems = new ObjectInputStream(fis);
+                Object fileContents = readReadingItems.readObject();
+                readReadingItems.close();
+                readingItems.addAll((Collection<? extends ReadingItem>) fileContents);
+            }
         } catch (IOException e) {
-            throw new readingItemException("I/O problems; can't read readingItems" + context.getFileStreamPath(readingItemFolder));
+            throw new readingItemException("I/O problems; can't read reading Items" + context.getFileStreamPath(readingItemFolder));
         } catch (ClassNotFoundException e) {
             throw new readingItemException(("Class not found exception"));
         }
