@@ -85,6 +85,7 @@ public class AddItemActivity extends AppCompatActivity {
         );
 
         ReadingContent.addReadingItem(newReadingItem);
+        startActivity(intent);
     }
 
 

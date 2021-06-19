@@ -25,7 +25,7 @@ public class readingItemSvcImplTest extends TestCase {
 
     @BeforeClass
     protected void setUp() throws Exception {
-        serviceFactory = ServiceFactory.getInstance();
+//        serviceFactory = ServiceFactory.getInstance();
     }
 
     @Test

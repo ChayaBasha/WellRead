@@ -22,7 +22,10 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
 
     private Context context = ServiceFactory.getInstance(null).context;
     private final String readingItemFolder = "readingItemFolder.sio";
-    private ArrayList<ReadingItem> readingItems;
+    private ArrayList<ReadingItem> readingItems = (ArrayList<ReadingItem>) getAllReadingItems();
+
+    public ReadingItemSvcImpl() throws readingItemException {
+    }
 
 //    private File readingItemFolder = new File("readingItems");
 
@@ -39,7 +42,7 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
 //                ));
 
             output.writeObject(readingItems);
-//                output.flush();
+            output.flush();
             output.close();
         } catch (IOException e) {
             throw new readingItemException("cannot save reading item");
@@ -48,7 +51,9 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
 
 
     public void createReadingItem(ReadingItem readingItem) throws readingItemException {
+        System.out.println(readingItem);
         readingItems.add(readingItem);
+        System.out.println(readingItems);
         writeFile();
     }
 
@@ -65,7 +70,7 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
                 Object fileContents = readReadingItems.readObject();
                 readReadingItems.close();
                 readingItems.addAll((Collection<? extends ReadingItem>) fileContents);
-            }
+            } else System.out.println("I can't find the file");
         } catch (IOException e) {
             throw new readingItemException("I/O problems; can't read reading Items" + context.getFileStreamPath(readingItemFolder));
         } catch (ClassNotFoundException e) {
