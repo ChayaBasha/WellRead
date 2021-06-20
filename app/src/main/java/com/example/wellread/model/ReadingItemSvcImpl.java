@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.annotation.RequiresPermission;
 
 import com.example.wellread.reading.ReadingItem;
+import com.example.wellread.reading.Status;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -78,7 +79,6 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
     @Override
     public ReadingItem getReadingItemById(String readingItemId) throws readingItemException {
 
-
         List<ReadingItem> readingItems = getAllReadingItems();
         ReadingItem readingItem = null;
         for (int i = 0; i < readingItems.size(); i++) {
@@ -95,18 +95,21 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
             return readingItem;
     }
 
-    @Override
-    public void updateReadingItem(ReadingItem readingItem) throws readingItemException {
-        ReadingItem existingReadingItem = this.getReadingItemById(readingItem.id);
-        if (existingReadingItem != null) {
+    public void updateReadingItem(String id, String title, String author, String recommender,
+                                  Integer year, Status status) throws readingItemException {
+        ReadingItem existingReadingItem = this.getReadingItemById(id);
 
-            existingReadingItem.title = readingItem.title;
-            existingReadingItem.author = readingItem.author;
-            existingReadingItem.year = readingItem.year;
-            existingReadingItem.recommender = readingItem.recommender;
-            existingReadingItem.status = readingItem.status;
+        for (int i = 0; i < readingItems.size(); i++) {
+            if (readingItems.get(i).id.equals(existingReadingItem.id)) {
 
-            this.createReadingItem(existingReadingItem);
+                readingItems.get(i).title = title;
+                readingItems.get(i).author = author;
+                readingItems.get(i).recommender = recommender;
+                readingItems.get(i).year = year;
+                readingItems.get(i).status = status;
+
+                writeFile();
+            }
         }
     }
 
@@ -114,10 +117,9 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
     public void deleteReadingItem(ReadingItem readingItem) throws readingItemException {
         ReadingItem existingReadingItem = this.getReadingItemById(readingItem.id);
 
-        for(int i = 0; i < readingItems.size(); i++){
+        for (int i = 0; i < readingItems.size(); i++) {
             if (readingItems.get(i).id.equals(existingReadingItem.id)) {
                 readingItems.remove(i);
-                System.out.println("WE HAVE A HIT ON "+ existingReadingItem.id);
 
                 break;
             }

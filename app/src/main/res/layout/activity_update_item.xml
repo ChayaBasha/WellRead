@@ -118,7 +118,7 @@
         android:layout_weight="0.3"
         android:background="@color/colorPrimary"
         android:text="Update"
-        android:onClick="saveReadingItem"
+        android:onClick="updateReadingItem"
         android:textColor="@color/cornsilk" />
 
 

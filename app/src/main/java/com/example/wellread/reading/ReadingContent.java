@@ -42,12 +42,10 @@ public class ReadingContent implements Serializable {
 
     //    private static final int COUNT = 25;
     public static List<ReadingItem> getReadingItems() throws ServiceLoadException, readingItemException {
-        System.out.println("get Reading Items was called");
         IReadingListSvc readingListService = readingService();
         List<ReadingItem> SAMPLE_DATA = new ArrayList<ReadingItem>(
                 readingListService.getAllReadingItems()
         );
-        System.out.println(SAMPLE_DATA);
         return SAMPLE_DATA;
     }
 
@@ -69,9 +67,9 @@ public class ReadingContent implements Serializable {
         readingListService.createReadingItem(newReadingItem);
     }
 
-    public static void updateReadingItem(ReadingItem readingItem) throws readingItemException, ServiceLoadException {
+    public static void updateReadingItem(String id, String title, String author, String recommender, Integer year, Status status) throws readingItemException, ServiceLoadException {
         IReadingListSvc readingListService = readingService();
-        readingListService.updateReadingItem(readingItem);
+        readingListService.updateReadingItem(id, title, author, recommender, year, status);
         }
 
 

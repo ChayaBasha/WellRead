@@ -43,7 +43,7 @@ public class UpdateItem extends AppCompatActivity {
         } catch (readingItemException e) {
             e.printStackTrace();
         }
-        toolbar.setTitle("Updating" + item.title);
+        toolbar.setTitle("Updating " + item.title);
         toolbar.setLogo(R.drawable.ic_launcher_book_foreground);
         setSupportActionBar(toolbar);
 
@@ -102,22 +102,21 @@ public class UpdateItem extends AppCompatActivity {
         }
     }
 
-    public void saveReadingItem(View view) throws ServiceLoadException, readingItemException {
+    public void updateReadingItem(View view) throws ServiceLoadException, readingItemException {
         Intent intent = new Intent(this, ItemListActivity.class);
         EditText editTitle = (EditText) findViewById(R.id.editTitle);
         EditText editAuthor = (EditText) findViewById(R.id.editAuthor);
         EditText editYear = (EditText) findViewById(R.id.editYear);
         EditText editRecommender = (EditText) findViewById(R.id.editRecommender);
 
-        ReadingItem newReadingItem = new ReadingItem(
+        ReadingContent.updateReadingItem(
+                item.id,
                 editTitle.getText().toString(),
                 editAuthor.getText().toString(),
                 editRecommender.getText().toString(),
                 Integer.parseInt(editYear.getText().toString()),
-                selectedStatus
-        );
+                selectedStatus);
 
-        ReadingContent.updateReadingItem(newReadingItem);
         startActivity(intent);
     }
 }
