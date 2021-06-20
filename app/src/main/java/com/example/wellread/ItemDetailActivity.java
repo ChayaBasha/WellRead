@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RadioButton;
 
 import com.example.wellread.model.ServiceLoadException;
@@ -68,6 +69,11 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     public void goBack(MenuItem action_back) {
         Intent intent = new Intent(this, ItemListActivity.class);
+        startActivity(intent);
+    }
+
+    public void editReadingItem(View view) throws readingItemException, ServiceLoadException {
+        Intent intent = new Intent(this, UpdateItem.class);
         startActivity(intent);
     }
 

@@ -35,10 +35,6 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
             FileOutputStream fos = context.openFileOutput(readingItemFolder, Context.MODE_PRIVATE);
 
             ObjectOutputStream output = new ObjectOutputStream(fos);
-//
-            for (int i = 0; i < readingItems.size(); i++) {
-                System.out.println(readingItems.get(i).title);
-            }
 
             output.writeObject(readingItems);
             output.flush();
@@ -126,25 +122,9 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
                 break;
             }
 
-//            System.out.println(readingItems.get(i).title);
         }
         writeFile();
     }
-//
-//        if (readingItem != null) {
-//            ReadingItem existingReadingItem = this.getReadingItemById(readingItem.id);
-//            context.deleteFile(existingReadingItem);
-//            File existingReadingItem = context.getFileStreamPath()readingItemFolder.toPath().resolve(readingItem.id + ".readingItem.out")
-//                    .toFile();
-//            if (existingReadingItem.exists()) {
-//                existingReadingItem.delete();
-//            } else
-//                throw new readingItemException(
-//                        "could not delete " + readingItem.id);
-//
-//        } else
-//            throw new readingItemException(" null input");
-//
-//    }
+
 }
 

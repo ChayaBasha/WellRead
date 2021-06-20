@@ -69,6 +69,12 @@ public class ReadingContent implements Serializable {
         readingListService.createReadingItem(newReadingItem);
     }
 
+    public static void updateReadingItem(ReadingItem readingItem) throws readingItemException, ServiceLoadException {
+        IReadingListSvc readingListService = readingService();
+        readingListService.updateReadingItem(readingItem);
+        }
+
+
     public static void deleteReadingItem(ReadingItem readingItem) throws ServiceLoadException, readingItemException {
         IReadingListSvc readingListService = readingService();
         readingListService.deleteReadingItem(readingItem);

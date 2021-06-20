@@ -87,4 +87,6 @@ public class ItemDetailFragment extends Fragment {
 
         return rootView;
     }
+
+
 }
