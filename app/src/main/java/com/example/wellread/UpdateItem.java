@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,7 +26,8 @@ import com.example.wellread.reading.Status;
 public class UpdateItem extends AppCompatActivity {
 
     private ReadingItem item = null;
-    private Status selectedStatus;
+    private Status selectedStatus = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,25 @@ public class UpdateItem extends AppCompatActivity {
         toolbar.setLogo(R.drawable.ic_launcher_book_foreground);
         setSupportActionBar(toolbar);
 
-    
+        EditText editTitle = (EditText) findViewById(R.id.editTitle);
+        editTitle.setText(item.title);
+        EditText editAuthor = (EditText) findViewById(R.id.editAuthor);
+        editAuthor.setText(item.author);
+        EditText editRecommender = (EditText) findViewById(R.id.editRecommender);
+        editRecommender.setText(item.recommender);
+        EditText editYear = (EditText) findViewById(R.id.editYear);
+        editYear.setText(item.year.toString());
+        if (item.status == Status.READ) {
+            RadioButton radioRead = (RadioButton) findViewById(R.id.radio_read);
+            radioRead.setChecked(true);
+        } else if (item.status == Status.TO_READ) {
+            RadioButton radioToRead = (RadioButton) findViewById(R.id.radio_to_read);
+            radioToRead.setChecked(true);
+        } else {
+            RadioButton radioObtain = (RadioButton) findViewById(R.id.radio_obtain);
+            radioObtain.setChecked(true);
+        }
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -59,25 +79,6 @@ public class UpdateItem extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.item_detail, container, false);
-
-
-        // Show the details in the detail screen
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.item_text_detail)).setText("Author: " + mItem.author
-                    + "\n" +
-                    "\nRecommender: " + mItem.recommender +
-                    "\n" +
-                    "\nYear: " + mItem.year +
-                    "\n");
-
-            ((RadioGroup) rootView.findViewById(R.id.radio_button)).getCheckedRadioButtonId();
-        }
-
-        return rootView;
-    }
     public void onRadioButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
 
@@ -116,7 +117,7 @@ public class UpdateItem extends AppCompatActivity {
                 selectedStatus
         );
 
-        ReadingContent.addReadingItem(newReadingItem);
+        ReadingContent.updateReadingItem(newReadingItem);
         startActivity(intent);
     }
 }
