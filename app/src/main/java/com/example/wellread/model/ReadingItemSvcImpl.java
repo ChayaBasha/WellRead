@@ -27,19 +27,18 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
     public ReadingItemSvcImpl() throws readingItemException {
     }
 
-//    private File readingItemFolder = new File("readingItems");
-
 
     public void writeFile() throws readingItemException {
         try {
+            System.out.println("write file was called");
 
             FileOutputStream fos = context.openFileOutput(readingItemFolder, Context.MODE_PRIVATE);
-//                readingItemFolder.mkdirs();
 
             ObjectOutputStream output = new ObjectOutputStream(fos);
-//                ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(
-//                        readingItemFolder.toPath().resolve((readingItem.id + ".readingItem.out")).toFile()
-//                ));
+//
+            for (int i = 0; i < readingItems.size(); i++) {
+                System.out.println(readingItems.get(i).title);
+            }
 
             output.writeObject(readingItems);
             output.flush();
@@ -78,38 +77,11 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
         }
         return readingItems;
     }
-//        List<ReadingItem> readingItems = new ArrayList<ReadingItem>();
-//        if (this.readingItemFolder.isDirectory()) {
-//            for (File file : this.readingItemFolder.listFiles()) {
-//                if (file.isFile()) {
-//                    try {
-//                        ObjectInputStream readReadingItems = new ObjectInputStream(new FileInputStream(file));
-//                        Object fileContents = readReadingItems.readObject();
-//                        readReadingItems.close();
-//                        if (fileContents instanceof ReadingItem) {
-//                            readingItems.add((ReadingItem) fileContents);
-//                        } else
-//                            throw new readingItemException(
-//                                    "file contents are not a reading Item " + file.getAbsolutePath());
-//                    } catch (IOException e) {
-//                        throw new readingItemException("IO problems " + file.getAbsolutePath());
-//                    } catch (ClassNotFoundException e) {
-//                        throw new readingItemException("class not found");
-//                    }
-//                } else
-//                    throw new readingItemException("not a file :-( " + file.getAbsolutePath());
-//            }
-//        } else
-//            throw new readingItemException(
-//                    "can't find directory Reading Items Folder " + this.readingItemFolder.getAbsolutePath());
-//        return readingItems;
-//    }
 
 
     @Override
     public ReadingItem getReadingItemById(String readingItemId) throws readingItemException {
 
-//        String ReadingItemId = readingItem1.id;
 
         List<ReadingItem> readingItems = getAllReadingItems();
         ReadingItem readingItem = null;
@@ -144,11 +116,25 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
 
     @Override
     public void deleteReadingItem(ReadingItem readingItem) throws readingItemException {
+        ReadingItem existingReadingItem = this.getReadingItemById(readingItem.id);
 
+        for(int i = 0; i < readingItems.size(); i++){
+            if (readingItems.get(i).id.equals(existingReadingItem.id)) {
+                readingItems.remove(i);
+                System.out.println("WE HAVE A HIT ON "+ existingReadingItem.id);
+
+                break;
+            }
+
+//            System.out.println(readingItems.get(i).title);
+        }
+        writeFile();
+    }
+//
 //        if (readingItem != null) {
 //            ReadingItem existingReadingItem = this.getReadingItemById(readingItem.id);
 //            context.deleteFile(existingReadingItem);
-////            File existingReadingItem = context.getFileStreamPath()readingItemFolder.toPath().resolve(readingItem.id + ".readingItem.out")
+//            File existingReadingItem = context.getFileStreamPath()readingItemFolder.toPath().resolve(readingItem.id + ".readingItem.out")
 //                    .toFile();
 //            if (existingReadingItem.exists()) {
 //                existingReadingItem.delete();
@@ -158,7 +144,7 @@ public class ReadingItemSvcImpl implements IReadingListSvc {
 //
 //        } else
 //            throw new readingItemException(" null input");
-
-    }
+//
+//    }
 }
 

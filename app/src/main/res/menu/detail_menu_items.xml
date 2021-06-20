@@ -11,6 +11,7 @@
         android:id="@+id/action_deleteItem"
         android:icon="@drawable/ic_action_delete_item"
         android:title="delete item"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"
+        android:onClick="deleteReadingItem"/>
 
 </menu>

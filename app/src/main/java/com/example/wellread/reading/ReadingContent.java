@@ -54,8 +54,8 @@ public class ReadingContent implements Serializable {
     public static Map<String, ReadingItem> getItemMap() throws ServiceLoadException, readingItemException {
         System.out.println("getItemMap from ReadingContent.java was called");
         List<ReadingItem> SAMPLE_DATA = getReadingItems();
-        Map<String, ReadingItem> itemMap =  new HashMap<>();
-        for (int i = 0 ; i < SAMPLE_DATA.size(); i++) {
+        Map<String, ReadingItem> itemMap = new HashMap<>();
+        for (int i = 0; i < SAMPLE_DATA.size(); i++) {
             ReadingItem item = SAMPLE_DATA.get(i);
             itemMap.put(item.id, item);
         }
@@ -69,5 +69,8 @@ public class ReadingContent implements Serializable {
         readingListService.createReadingItem(newReadingItem);
     }
 
-
+    public static void deleteReadingItem(ReadingItem readingItem) throws ServiceLoadException, readingItemException {
+        IReadingListSvc readingListService = readingService();
+        readingListService.deleteReadingItem(readingItem);
+    }
 }
