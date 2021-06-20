@@ -74,6 +74,7 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     public void editReadingItem(View view) throws readingItemException, ServiceLoadException {
         Intent intent = new Intent(this, UpdateItem.class);
+        intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id);
         startActivity(intent);
     }
 

@@ -35,7 +35,7 @@ public class ItemDetailFragment extends Fragment {
     public static final String ARG_ITEM_ID = "item_id";
 
     /**
-     * The dummy content this fragment is presenting.
+     * The reading item content this fragment is presenting.
      */
     private ReadingItem mItem;
 
@@ -51,9 +51,7 @@ public class ItemDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
+            // Loads the details from the file system
             try {
                 mItem = ReadingContent.getItemMap().get(getArguments().getString(ARG_ITEM_ID));
             } catch (ServiceLoadException e) {
@@ -72,8 +70,7 @@ public class ItemDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.item_detail, container, false);
 
 
-        // Show the details in the detail screen; this should be made nicer and I need to add the
-        // radio button too
+        // Show the details in the detail screen
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.item_text_detail)).setText("Author: " + mItem.author
                     + "\n" +
