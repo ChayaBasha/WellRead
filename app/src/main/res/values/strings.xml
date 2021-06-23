@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Well Read</string>
+
     <string name="title_item_detail">Well Read</string>
     <string name="title_message">Enter Title</string>
     <string name="author_message">Enter Author</string>
@@ -10,4 +11,6 @@
     <string name="ToRead">To Read</string>
     <string name="Read">Read</string>
 
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 </resources>
