@@ -8,8 +8,9 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ServiceFactory {
+    public static Context context;
     private Properties props;
-    public Context context;
+
 
     private ServiceFactory(Context context) {
         if(context == null) {
@@ -26,8 +27,6 @@ public class ServiceFactory {
             serviceFactory = new ServiceFactory(newContext);
         }
 
-//        System.out.println(serviceFactory);
-//        System.out.println(serviceFactory.context);
         return serviceFactory;
     }
 
@@ -47,9 +46,8 @@ public class ServiceFactory {
     private String getImplName(String serviceName) throws Exception {
         if (props == null) {
             props = new Properties();
-//            Resources res = new Resources(null, null, null)
+
             InputStream fis = context.getResources().openRawResource(R.raw.service_names);
-//            InputStream fis = new FileInputStream("/Users/johannablumenthal/AndroidStudioProjects/WellRead/app/src/main/res/raw/service_names.properties");
             props.load(fis);
             fis.close();
         }

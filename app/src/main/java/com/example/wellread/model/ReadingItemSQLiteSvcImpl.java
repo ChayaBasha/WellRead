@@ -18,17 +18,18 @@ public class ReadingItemSQLiteSvcImpl extends SQLiteOpenHelper implements IReadi
     private static final int DATABASE_VERSION = 1;
     private ArrayList<ReadingItem> readingItems = (ArrayList<ReadingItem>) getAllReadingItems();
 
-    public ReadingItemSQLiteSvcImpl(Context context) throws readingItemException {
 
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    public ReadingItemSQLiteSvcImpl() throws readingItemException {
+
+        super(ServiceFactory.context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    private String createReadingItemTable =
-            "create table readingItem (id text primary key," +
-                    "title text not null, author text, recommender text , year int, status text)";
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        String createReadingItemTable =
+                "create table readingItem (id text primary key," +
+                        "title text not null, author text, recommender text , year int, status text)";
         sqLiteDatabase.execSQL(createReadingItemTable);
     }
 
