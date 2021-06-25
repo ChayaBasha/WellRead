@@ -30,6 +30,19 @@ public class ReadingItem implements Serializable {
         this.year = year;
         this.status = status;
     }
+    public ReadingItem (String id,
+                        String title,
+                        String author,
+                        String recommender,
+                        Integer year,
+                        Status status) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.recommender = recommender;
+        this.year = year;
+        this.status = status;
+    }
 
 
 }
