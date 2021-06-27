@@ -9,8 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_book_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".About"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Settings"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".About"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".UpdateItem"
             android:theme="@style/AppTheme.NoActionBar" />

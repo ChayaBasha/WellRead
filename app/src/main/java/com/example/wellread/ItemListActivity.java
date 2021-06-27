@@ -110,6 +110,11 @@ public class ItemListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToSettings(MenuItem nav_about) {
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
+    }
+    
     public void addReadingItem(MenuItem action_addReadingItem) {
         Intent intent = new Intent(this, AddItemActivity.class);
         startActivity(intent);
