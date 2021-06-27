@@ -23,12 +23,37 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textColor="@color/colorPrimary"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_margin="16dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This is some text"
+        android:text="Well Read is an app for keeping track of reading recommendations."
         android:textColor="@color/colorPrimaryDark"
-        style="?android:attr/textAppearanceLarge"/>
+        style="?android:attr/textAppearanceLarge"
+        android:layout_margin="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Version"
+        android:textColor="@color/colorPrimary"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_margin="16dp"/>
+
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Version 0.1 2021 by Johanna Blumenthal"
+    android:textColor="@color/colorPrimaryDark"
+    style="?android:attr/textAppearanceLarge"
+    android:layout_margin="16dp"/>
+
 </LinearLayout>
 
