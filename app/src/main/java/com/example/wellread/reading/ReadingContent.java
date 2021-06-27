@@ -1,5 +1,7 @@
 package com.example.wellread.reading;
 
+import androidx.annotation.RequiresPermission;
+
 import com.example.wellread.model.IReadingListSvc;
 import com.example.wellread.model.IService;
 import com.example.wellread.model.ServiceFactory;
@@ -77,4 +79,19 @@ public class ReadingContent implements Serializable {
         IReadingListSvc readingListService = readingService();
         readingListService.deleteReadingItem(readingItem);
     }
+
+    public List<ReadingItem> showReadItems() throws ServiceLoadException, readingItemException {
+        IReadingListSvc readingListService = readingService();
+        List<ReadingItem> AllReadingItems = new ArrayList<ReadingItem>(
+                readingListService.getAllReadingItems()
+        );
+        List<ReadingItem> ReadItems = new ArrayList<>();
+                for(int i = 0; i < AllReadingItems.size(); i++) {
+                    if(AllReadingItems.get(i).status.name().equals(Status.READ)) {
+                        ReadItems.add(AllReadingItems.get(i));
+                    };
+                }
+        return ReadItems;
+    }
+
 }

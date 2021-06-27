@@ -114,7 +114,12 @@ public class ItemListActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
     }
-    
+
+    public void goToSync(MenuItem nav_about) {
+        Intent intent = new Intent(this, Sync.class);
+        startActivity(intent);
+    }
+
     public void addReadingItem(MenuItem action_addReadingItem) {
         Intent intent = new Intent(this, AddItemActivity.class);
         startActivity(intent);
