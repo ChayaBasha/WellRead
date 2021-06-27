@@ -61,7 +61,7 @@ public class ItemListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item_list);
         ServiceFactory.getInstance(getApplicationContext());
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setLogo(R.drawable.ic_launcher_book_foreground);
         toolbar.setTitle(getTitle());
@@ -103,6 +103,11 @@ public class ItemListActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void goToAbout(MenuItem nav_about) {
+        Intent intent = new Intent(this, About.class);
+        startActivity(intent);
     }
 
     public void addReadingItem(MenuItem action_addReadingItem) {
