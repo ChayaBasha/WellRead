@@ -117,6 +117,8 @@ public class UpdateItem extends AppCompatActivity {
                 Integer.parseInt(editYear.getText().toString()),
                 selectedStatus);
 
+        System.out.println(selectedStatus);
+
         startActivity(intent);
     }
 }
